@@ -1,0 +1,40 @@
+/* content boxes */
+
+.box.full-size {
+    width: 720px;
+}
+
+.box {
+    position: relative;
+    padding: 30px;
+    background: #fff;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.box div.border-tl,
+.box div.border-top,
+.box div.border-tr,
+.box div.border-right,
+.box div.border-br,
+.box div.border-bottom,
+.box div.border-bl,
+.box div.border-left {
+    position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
+}
+
+.box div.border-tl { background: top left no-repeat url('../images/box/tl.png'); z-index: -1; }
+
+.box div.border-top { background: top left repeat-x url('../images/box/top.png'); z-index: -2; }
+
+.box div.border-tr { background: top right no-repeat url('../images/box/tr.png'); z-index: -1; }
+
+.box div.border-right { background: top right repeat-y url('../images/box/right.png'); z-index: -2; }
+
+.box div.border-br { background: bottom right no-repeat url('../images/box/br.png'); z-index: -1; }
+
+.box div.border-bottom { background: bottom left repeat-x url('../images/box/bottom.png'); z-index: -2; }
+
+.box div.border-bl { background: bottom left no-repeat url('../images/box/bl.png'); z-index: -1; }
+
+.box div.border-left { background: top left repeat-y url('../images/box/left.png'); z-index: -2; }

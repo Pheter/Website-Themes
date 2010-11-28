@@ -1,0 +1,27 @@
+/* top */
+
+div#top {
+    background: top left repeat-x url('../images/top.png');
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    min-width: 827px;
+    height: 4px;
+    z-index: 1;
+}
+
+/* main */
+
+div#main {
+    width: 780px;
+    margin: 4px auto 0px auto;
+    padding: 10px 0px 0px 47px;
+    position: relative;
+}
+
+img#home-icon {
+    position: absolute;
+    top: -2px;
+    left: 0px;
+    z-index: 2;
+}
