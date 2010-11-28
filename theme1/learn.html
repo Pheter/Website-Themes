@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hummingbird Framework</title>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div id="top"></div>
+        <div id="wrapper">
+            <div id="header">
+                <a href="/"><img src="images/logo.png" class="logo" alt="Hummingbird Framework" /></a>
+                <ul id="nav">
+                    <li class="selected"><a href="">home</a></li>
+                    <li><a href="">learn</a></li>
+                    <li><a href="">download</a></li>
+                </ul>
+            </div>
+            <div id="content">
+                <h1>Introduction</h1>
+                <p>Hummingbird is a lightweight web framework that is highly flexible due to it's minimalistic design. The core is nothing more than a simple implementation of the MVC pattern that is used to logically organise project specific code. Plugins introduce functionality such as authentication, and wrappers around ORMs and templating engines so that you can easily customise the framework to utilise your favourite tools and libraries.</p>
+                <p>Following this short getting started guide is the best way to familiarise yourself with Hummingbird and the ethos behing it so we recommend you work through the examples provided to understand just how simple and flexible the Hummingbird framework is!</p>
+                <h2>Installation</h2>
+                <p>The typical Hummingbird setup is very simple; the core files can be located anywhere in the file system, so long as they are added to the PHP path. Hummingbird's core is a self contained library which means that multiple projects can make use of the same Hummingbird core instance.</p>
+                <p>To get started, download the Hummingbird framework and move the folder 'hummingbird' containing the core files to your home directory. Now we need to create a 'front controller' through which all requests to your web server will be directed. This will require two files: an index.php file that will be called whenever someone accesses your web server, and a .htaccess which will route all requests to the index.php file. You may have noticed a folder within the Hummingbird framework called 'project'. You can copy the contents of this folder to your website's route folder, but for this guide we will create each file from scratch so you can understand the function of each of them.</p>
+                <p>Create a file called 'index.php' and paste the following code into it:</p>
+                <pre>
+<code>ini_set('include_path', '../hummingbird');
+
+require('Hummingbird.php');
+$Bamboo = new Hummingbird(file_get_contents('config.yml'));</code>
+                </pre>
+                <p>The first line adds the Hummingbird core to the path, the second requires the Hummingbird class and the third line creates an instance of it. You will have probably noticed the paramater that is passed during initialization of the Hummingbird object. This is the configuration for the instance of the framework, which is contained in a seperate file which will be explained later.</p>
+                <p>Now that we have a front controller set up, we need to ensure that all requests to the server are directed towards index.php. To do this we will create a .htaccess file and fill it with some rewrite rules.</p>
+                <p>Create a file called .htaccess and fill it with the following:</p>
+                <pre>
+<code>Options +FollowSymLinks +MultiViews -Indexes
+
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+#ErrorDocument 400 /index.php?error=400
+#ErrorDocument 403 /index.php?error=403
+#ErrorDocument 404 /index.php?error=404
+#ErrorDocument 500 /index.php?error=500
+
+<IfModule mod_rewrite.c>
+
+  RewriteEngine on
+  RewriteBase /
+  
+  #Add trailing slashes
+  RewriteCond %{REQUEST_URI} !(.*)/$
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^(.*)$ $1/ [R=301,L]
+  
+  # Route all URLs to index.php.
+  RewriteRule ^(.*)$ index.php [L]
+
+</IfModule></code>
+                </pre>
+            </div>
+        </div>
+        <div id="bottom"></div>
+    </body>
+</html>
